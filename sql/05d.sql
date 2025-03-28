@@ -12,3 +12,27 @@
  * There are many ways to solve this problem,
  * but I personally found the INTERSECT operator to make a convenient solution.
  */
+
+(SELECT fa.title
+FROM film fa
+JOIN film_actor a USING (film_id)
+JOIN film_actor b USING (actor_id)
+JOIN film fb ON (fb.film_id = b.film_id)
+WHERE fb.title LIKE 'ACADEMY DINOSAUR'
+INTERSECT
+SELECT fa.title
+FROM film fa
+JOIN film_actor a USING (film_id)
+JOIN film_actor b USING (actor_id)
+JOIN film fb ON (fb.film_id = b.film_id)
+WHERE fb.title LIKE 'AMERICAN CIRCUS'
+INTERSECT
+SELECT fa.title
+FROM film fa
+JOIN film_actor a USING (film_id)
+JOIN film_actor b USING (actor_id)
+JOIN film fb ON (fb.film_id = b.film_id)
+WHERE fb.title LIKE 'AGENT TRUMAN'
+)
+ORDER BY title
+;

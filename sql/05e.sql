@@ -18,3 +18,13 @@
  * ```
  * This problem should be solved by a self join on the "film_category" table.
  */
+
+SELECT fa.title
+FROM film fa
+JOIN film_category a ON (fa.film_id = a.film_id)
+JOIN category USING (category_id)
+JOIN film_category b ON (category.category_id = b.category_id)
+JOIN film fb ON (fb.film_id = b.film_id)
+WHERE fb.title = 'AMERICAN CIRCUS'
+GROUP BY fa.film_id, fa.title
+HAVING COUNT(DISTINCT category.category_id) >= 2;
